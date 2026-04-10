@@ -1,9 +1,19 @@
+# Maven
 target/
-node_modules/
-dist/
-uploads/
-.env
-*.log
-.DS_Store
+*.class
+*.jar
+*.war
+
+# IDE
 .idea/
 *.iml
+.vscode/
+
+# Logs
+*.log
+
+# Uploads (local files)
+uploads/
+
+# Environment
+.env
