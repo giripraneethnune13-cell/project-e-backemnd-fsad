@@ -31,6 +31,9 @@ public class FileStorageService {
             "video/mp4", "video/webm", "video/ogg", "video/quicktime", "video/x-msvideo"
     );
     private static final List<String> ALLOWED_PDF_TYPES = List.of("application/pdf");
+    private static final List<String> ALLOWED_ZIP_TYPES = Arrays.asList(
+            "application/zip", "application/x-zip-compressed", "application/x-rar-compressed", "application/octet-stream"
+    );
 
     @Value("${app.upload.dir}")
     private String uploadDir;
@@ -46,11 +49,12 @@ public class FileStorageService {
         String contentType = file.getContentType();
         boolean allowed = ALLOWED_IMAGE_TYPES.contains(contentType)
                 || ALLOWED_VIDEO_TYPES.contains(contentType)
-                || ALLOWED_PDF_TYPES.contains(contentType);
+                || ALLOWED_PDF_TYPES.contains(contentType)
+                || ALLOWED_ZIP_TYPES.contains(contentType);
 
         if (!allowed) {
             throw new IllegalArgumentException(
-                "Unsupported file type: " + contentType + ". Only images, PDFs, and videos are allowed."
+                "Unsupported file type: " + contentType + ". Only images, PDFs, videos, and ZIP archives are allowed."
             );
         }
 
@@ -108,6 +112,7 @@ public class FileStorageService {
         if (ALLOWED_IMAGE_TYPES.contains(contentType)) return "IMAGE";
         if (ALLOWED_VIDEO_TYPES.contains(contentType)) return "VIDEO";
         if (ALLOWED_PDF_TYPES.contains(contentType)) return "PDF";
+        if (ALLOWED_ZIP_TYPES.contains(contentType)) return "ZIP";
         return "OTHER";
     }
 
