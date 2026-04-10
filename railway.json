@@ -5,7 +5,6 @@
     "dockerfilePath": "Dockerfile"
   },
   "deploy": {
-    "startCommand": "bash -c 'java -Xmx300m -Dspring.profiles.active=prod -jar $(ls target/*.jar | grep -v \"plain\")'",
     "healthcheckTimeout": 300,
     "restartPolicyType": "ON_FAILURE"
   }
